@@ -1,0 +1,28 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    <body>
+        <div>
+            The following new standard has been added to the Codes & Standards Application: [[${organization.name}]] – [[${standard.name}]] # - [[${standard.description}]]:
+        </div>
+        <br>
+        <div>
+            <p>Identifying #: [[${standard.name}]]</p>
+            <p>Edition: [[${standard.edition}]]</p>
+            <p>Organization: [[${organization.name}]]</p>
+            <p>Description: [[${standard.description}]]</p>
+            <p>Critical to Business: [[${standardDivision.criticalToBusiness}]]</p>
+            <p>Divisions: [[${standardDivision.division.name}]]</p>
+            <p th:if="${standardDivision.subDivision} != null">Sub Divisions: [[${standardDivision.subDivision.name}]]</p>
+            <p>Product Line: [[${standardDivision.productLine.name}]]</p>
+            <p>Product Line Contact Email Address: [[${contacts}]]</p>
+            <p>Names of Standards Participant(s) email addresses: [[${standardDivision.rawStandardParticipant}]]</p>
+            <p>Comments: [[${standardDivision.comment}]]</p>
+            <p>Date: [[${standard.date}]]</p>
+        </div>
+        <br>
+        <div>
+	        <p><b>Notes:</b></p>
+	        <p><b>Please review the title and if this new standard is important or relevant to your business/division, please input your “Product Line” and “Product Line Contact Email Address” in the appropriate fields, so you can be notified of updates.</b></p>
+	        <p><b>Additionally, if this new standard is "Critical" to your business/division, please also mark it as critical in the appropriate field in the Codes & Standards Application</b></p>
+        </div>
+    </body>
+ </html>

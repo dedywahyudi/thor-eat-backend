@@ -1,0 +1,83 @@
+{
+  "id": "cece0efb-207d-4786-b3fa-814b63b63d9f",
+  "name": "EARLY_ENV",
+  "values": [
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "value": "http://localhost:8081/api/v1",
+      "key": "URL",
+      "enabled": true
+    },
+    {
+      "value": 2,
+      "key": "USER_ID",
+      "enabled": true
+    },
+    {
+      "value": "67fa5d21-0173-4586-b00d-d3fc8f9e1e85",
+      "key": "TOKEN",
+      "enabled": true
+    },
+    {
+      "value": "4914",
+      "key": "STANDARD_ID",
+      "enabled": true
+    },
+    {
+      "value": null,
+      "key": "STANDARD_DIVISION_ID",
+      "enabled": true
+    },
+    {
+      "value": 4,
+      "key": "STANDARD_DIVISION_CONTACT_ID",
+      "enabled": true
+    },
+    {
+      "value": 79,
+      "key": "CNS_ISSUE_ID",
+      "enabled": true
+    },
+    {
+      "value": 48,
+      "key": "ORGANIZATION_ID",
+      "enabled": true
+    },
+    {
+      "value": "1.7",
+      "key": "DIVISION_ID",
+      "enabled": true
+    },
+    {
+      "value": 341,
+      "key": "PRODUCT_LINE_ID",
+      "enabled": true
+    },
+    {
+      "value": 2138,
+      "key": "PRODUCT_LINE_CONTACT_ID",
+      "enabled": true
+    },
+    {
+      "value": 4982,
+      "key": "HISTORY_ID",
+      "enabled": true
+    },
+    {
+      "value": 62,
+      "key": "SUB_DIVISION_ID",
+      "enabled": true
+    },
+    {
+      "value": 28,
+      "key": "CHANGE_REQUEST_ID",
+      "enabled": true
+    }
+  ],
+  "_postman_variable_scope": "environment",
+  "_postman_exported_at": "2018-09-07T09:43:57.589Z",
+  "_postman_exported_using": "Postman/6.2.5"
+}

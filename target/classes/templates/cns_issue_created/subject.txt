@@ -1,0 +1,1 @@
+NOTICE: The following “New” CnS Issue has been added to the Codes & Standards Application: [[${standard ? standard.organization.name : 'null'}]] – [[${standard? standard.name : 'null'}]] - [[${standard? standard.description : 'null'}]]

@@ -1,0 +1,1 @@
+Standard : [[${standard.name}]] is updated

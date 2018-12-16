@@ -1,0 +1,1 @@
+NOTICE: The following “New” standard has been added to the Codes & Standards Application: [[${organization.name}]] – [[${standard.name}]] # - [[${standard.description}]]

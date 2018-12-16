@@ -1,0 +1,13 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    <body>
+        <div>
+            The following new [[${type}]] has been added to the Codes & Standards Application: [[${item.name}]]
+        </div>
+        <br>
+        <div>
+            <p>Name #: [[${item.name}]]</p>
+            <p th:if="${item.divisionId} != null">Region: [[${item.edition}]]</p>
+            <p th:if="${parent} != null">Parent Division: [[${parent.name}]]</p>
+        </div>
+    </body>
+ </html>

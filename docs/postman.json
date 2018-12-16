@@ -1,0 +1,2309 @@
+{
+	"info": {
+		"_postman_id": "979b568c-1fca-4e91-b262-d6f9ec52f1e4",
+		"name": "Thor - Early Alert Tool API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "login",
+			"item": [
+				{
+					"name": "Login with username and password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e2d44085-fc9e-4ae6-be56-8c4412245324",
+								"type": "text/javascript",
+								"exec": [
+									"pm.environment.set(\"TOKEN\", pm.response.json().accessToken);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"admin\",\n\t\"password\": \"Password123\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/login",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"login"
+							]
+						},
+						"description": "An access token will be generated and returned so that the client side can set it to `Authorization` header to make calls to the APIs which require authentication"
+					},
+					"response": []
+				},
+				{
+					"name": "Login with username and password AdminApprover",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e2d44085-fc9e-4ae6-be56-8c4412245324",
+								"type": "text/javascript",
+								"exec": [
+									"pm.environment.set(\"TOKEN\", pm.response.json().accessToken);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"adminapprover\",\n\t\"password\": \"Password123\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/login",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"login"
+							]
+						},
+						"description": "An access token will be generated and returned so that the client side can set it to `Authorization` header to make calls to the APIs which require authentication"
+					},
+					"response": []
+				}
+			],
+			"description": "Folder for login"
+		},
+		{
+			"name": "organizations",
+			"item": [
+				{
+					"name": "Search Organizations, results are sorted by `name asc`",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/organizations",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"organizations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a new Organization. Administrator only",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "95796049-8b45-44f6-b12a-5064930d2fc6",
+								"type": "text/javascript",
+								"exec": [
+									"pm.environment.set(\"ORGANIZATION_ID\", pm.response.json().id);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"test org\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/organizations",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"organizations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get an existing Organization",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/organizations/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"organizations",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{ORGANIZATION_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update an existing Organization. Administrator only",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"modified name\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/organizations/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"organizations",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{ORGANIZATION_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete an existing Organization. Administrator only",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/organizations/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"organizations",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{ORGANIZATION_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Folder for organizations"
+		},
+		{
+			"name": "divisions",
+			"item": [
+				{
+					"name": "Search Divisions, results are sorted by `id asc`",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/divisions?region=EPG (Americas)",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"divisions"
+							],
+							"query": [
+								{
+									"key": "region",
+									"value": "EPG (Americas)"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a new Division. Administrator only",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4eb09731-6220-4b1f-9f7e-90636d459f7e",
+								"type": "text/javascript",
+								"exec": [
+									"pm.environment.set(\"DIVISION_ID\", pm.response.json().id);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": \"1.7\",\n  \"name\": \"CPD-ICD\",\n  \"region\": \"EPG (Americas)\",\n  \"parentDivision\": {\n  \t\"id\": 1.1\n  }\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/divisions",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"divisions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get an existing Division",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/divisions/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"divisions",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{DIVISION_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update an existing Division. Administrator only",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"testing\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/divisions/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"divisions",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{DIVISION_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete an existing Division. Administrator only",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/divisions/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"divisions",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{DIVISION_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Folder for divisions"
+		},
+		{
+			"name": "subDivisions",
+			"item": [
+				{
+					"name": "Search SubDivisions, results are sorted by `divisionId asc, name asc`",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/subDivisions?divisionId=1.2",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"subDivisions"
+							],
+							"query": [
+								{
+									"key": "divisionId",
+									"value": "1.2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a new SubDivision. Administrator only",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "42adadbd-0638-4d1d-b2fa-fbe39b547226",
+								"type": "text/javascript",
+								"exec": [
+									"pm.environment.set(\"SUB_DIVISION_ID\", pm.response.json().id);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"ICD\",\n  \"divisionId\": \"1.1\",\n  \"parentSubDivision\": {\n  \t\"id\": 63\n  }\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/subDivisions",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"subDivisions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get an existing SubDivision",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/subDivisions/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"subDivisions",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{SUB_DIVISION_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update an existing SubDivision. Administrator only",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"ICD modified\",\n  \"divisionId\": \"1.1\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/subDivisions/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"subDivisions",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{SUB_DIVISION_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete an existing SubDivision. Administrator only",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/subDivisions/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"subDivisions",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{SUB_DIVISION_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Folder for subDivisions"
+		},
+		{
+			"name": "productLines",
+			"item": [
+				{
+					"name": "Search ProductLines, results are sorted by `divisionId asc, name asc`",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/productLines?subDivisionId=10",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"productLines"
+							],
+							"query": [
+								{
+									"key": "subDivisionId",
+									"value": "10"
+								},
+								{
+									"key": "divisionId",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a new ProductLine. Administrator only",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6e31adb4-dc58-48ff-bc71-1103e0961740",
+								"type": "text/javascript",
+								"exec": [
+									"pm.environment.set(\"PRODUCT_LINE_ID\", pm.response.json().id);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Switching Devices\",\n  \"divisionId\": \"12.34\",\n  \"subDivisionId\": 1\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/productLines",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"productLines"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get an existing ProductLine",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/productLines/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"productLines",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{PRODUCT_LINE_CONTACT_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update an existing ProductLine. Administrator only",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"testing\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/productLines/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"productLines",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{PRODUCT_LINE_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete an existing ProductLine. Administrator only",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/productLines/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"productLines",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{PRODUCT_LINE_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Folder for productLines"
+		},
+		{
+			"name": "productLineContacts",
+			"item": [
+				{
+					"name": "Search ProductLineContacts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/productLineContacts?",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"productLineContacts"
+							],
+							"query": [
+								{
+									"key": "productLineId",
+									"value": "{{productLineId}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a new ProductLineContact. Administrator only",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "17085e0b-cab9-4da5-858b-03a2d4f2581f",
+								"type": "text/javascript",
+								"exec": [
+									"pm.environment.set(\"PRODUCT_LINE_CONTACT_ID\", pm.response.json().id);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"contactEmail\": \"JohnIDoes@Eaton.com\",\n  \"productLineId\": 1\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/productLineContacts",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"productLineContacts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get an existing ProductLineContact",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/productLineContacts/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"productLineContacts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{PRODUCT_LINE_CONTACT_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update an existing ProductLineContact. Administrator only",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"contactEmail\": \"kinfkong@126.com\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/productLineContacts/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"productLineContacts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{PRODUCT_LINE_CONTACT_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete an existing ProductLineContact. Administrator only",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/productLineContacts/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"productLineContacts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{PRODUCT_LINE_CONTACT_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Folder for productLineContacts"
+		},
+		{
+			"name": "histories",
+			"item": [
+				{
+					"name": "Search Histories, results are sorted by `modifiedDate desc`",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/histories?userId=1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"histories"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a new History. Administrator only",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "42715e0a-109a-42e9-ad7e-0b28da617647",
+								"type": "text/javascript",
+								"exec": [
+									"pm.environment.set(\"HISTORY_ID\", pm.response.json().id);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"recordId\": 1,\n  \"recordName\": \"string\",\n  \"recordType\": \"Standard\",\n  \"operation\": \"Insert\",\n  \"userId\": 1\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/histories",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"histories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get an existing History",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/histories/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"histories",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{HISTORY_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update an existing History. Administrator only",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"userId\": 2\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/histories/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"histories",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{HISTORY_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete an existing History. Administrator only",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/histories/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"histories",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{HISTORY_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Folder for histories"
+		},
+		{
+			"name": "roles",
+			"item": [
+				{
+					"name": "Get all roles. Administrator only",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/roles",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"roles"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Folder for roles"
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "Search Users, results are sorted by `fullName asc`. Administrator only",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/users?keyword=jordan",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "keyword",
+									"value": "jordan"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a new User. Administrator only",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6b678442-0d8e-4480-8765-2984d7554acc",
+								"type": "text/javascript",
+								"exec": [
+									"pm.environment.set(\"USER_ID\", pm.response.json().id);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"topcoder{{$randomInt}}\",\n  \"password\": \"Password123\",\n  \"email\": \"JohnIDoes-{{$randomInt}}@Eaton.com\",\n  \"fullName\": \"Does, John I\",\n  \"role\": {\n  \t\"id\": 1\n  }\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/users",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get an existing User. Administrator only",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/users/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update an existing User. Administrator only",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"fullName\": \"yyy\",\n\t\"password\": \"123456#abcaaad\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/users/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{USER_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete an existing User. Administrator only",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/users/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{USER_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Folder for users"
+		},
+		{
+			"name": "standards",
+			"item": [
+				{
+					"name": "Search Standards, results are sorted by `name asc`",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/standards?keyword=test delete",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"standards"
+							],
+							"query": [
+								{
+									"key": "sortColumn",
+									"value": "{{sortColumn}}",
+									"disabled": true
+								},
+								{
+									"key": "sortDirection",
+									"value": "{{sortDirection}}",
+									"disabled": true
+								},
+								{
+									"key": "organizationId",
+									"value": "10",
+									"disabled": true
+								},
+								{
+									"key": "keyword",
+									"value": "test delete"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a new Standard. Administrator and DataManager only",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d1ca5a42-a1e6-4165-b893-eae4752148e9",
+								"type": "text/javascript",
+								"exec": [
+									"pm.environment.set(\"CHANGE_REQUEST_ID\", pm.response.json().id);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"1907/2006/EG\",\n  \"description\": \"REACH – Regulation (EC) test delete\",\n  \"edition\": \"A\",\n  \"date\": \"2018-01-02\",\n  \"organization\": {\n    \"id\": 1\n  }\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/standards",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"standards"
+							]
+						},
+						"description": "This action will not directly insert a new row into Standard table. Instead, it will create a new ChangeRequest in database with type = `Insert`"
+					},
+					"response": []
+				},
+				{
+					"name": "Get an existing Standard",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/standards/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"standards",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update an existing Standard. Administrator and DataManager only",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1ce7b24f-c6e0-4be2-ab3e-969adb7b0f14",
+								"type": "text/javascript",
+								"exec": [
+									"pm.environment.set(\"CHANGE_REQUEST_ID\", pm.response.json().id);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"description\": \"REACH – Regulation (EC) kk good\",\n\t\"organization\": {\n\t\t\"id\": 2\n\t}\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/standards/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"standards",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{STANDARD_ID}}"
+								}
+							]
+						},
+						"description": "This action will not directly update into Standard table. Instead, it will create a new ChangeRequest in database with type = `Update`"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete an existing Standard. Administrator and DataManager only",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "da9addcb-3a90-4b72-b0e9-e98acd97cb60",
+								"type": "text/javascript",
+								"exec": [
+									"pm.environment.set(\"CHANGE_REQUEST_ID\", pm.response.json().id);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/standards/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"standards",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{STANDARD_ID}}"
+								}
+							]
+						},
+						"description": "This action will not directly update into Standard table. Instead, it will create a new ChangeRequest with type = `Delete`"
+					},
+					"response": []
+				}
+			],
+			"description": "Folder for standards"
+		},
+		{
+			"name": "standardDivisions",
+			"item": [
+				{
+					"name": "Search StandardDivisions, results are sorted by `criticalToBusiness desc, standardId asc`",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/standardDivisions?",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"standardDivisions"
+							],
+							"query": [
+								{
+									"key": "subDivisionId",
+									"value": "{{subDivisionId}}",
+									"disabled": true
+								},
+								{
+									"key": "productLineId",
+									"value": "{{productLineId}}",
+									"disabled": true
+								},
+								{
+									"key": "organizationId",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "standardId",
+									"value": "{{standardId}}",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "JohnIDoes2@Eaton.com",
+									"disabled": true
+								},
+								{
+									"key": "keyword",
+									"value": "1907/2006/EG",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a new StandardDivision. Administrator and DataManager only",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e1196025-0a11-4018-815e-481a0b06d2e6",
+								"type": "text/javascript",
+								"exec": [
+									"pm.environment.set(\"STANDARD_DIVISION_ID\", pm.response.json().id);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"criticalToBusiness\": true,\n  \"comment\": \"a comment\",\n  \"standardParticipant\": [\n    \"JohnIDoes2@Eaton.com\"\n  ],\n  \"standard\": {\n    \"id\": 2\n  },\n  \"division\": {\n    \"id\": \"1.1\"\n  },\n  \"subDivision\": {\n    \"id\": 1\n  },\n  \"productLine\": {\n    \"id\": 1\n  }\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/standardDivisions",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"standardDivisions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get an existing StandardDivision",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/standardDivisions/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"standardDivisions",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update an existing StandardDivision. Administrator and DataManager only",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"criticalToBusiness\": true,\n\t\"standardParticipant\": [\"kk@126.com\"]\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/standardDivisions/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"standardDivisions",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{STANDARD_DIVISION_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete an existing StandardDivision. Administrator and DataManager only",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/standardDivisions/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"standardDivisions",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{STANDARD_DIVISION_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Folder for standardDivisions"
+		},
+		{
+			"name": "standardDivisionContacts",
+			"item": [
+				{
+					"name": "Search StandardDivisionContacts, results are sorted by `standardDivisionId asc, contactEmail asc`",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/standardDivisionContacts?standardDivisionId=2&keyword=a",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"standardDivisionContacts"
+							],
+							"query": [
+								{
+									"key": "standardDivisionId",
+									"value": "2"
+								},
+								{
+									"key": "keyword",
+									"value": "a"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a new StandardDivisionContact. Administrator and DataManager only",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6f51e428-9c93-4a49-aaaa-13d51a513966",
+								"type": "text/javascript",
+								"exec": [
+									"pm.environment.set(\"STANDARD_DIVISION_CONTACT_ID\", pm.response.json().id);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"contactEmail\": \"JohnIDoes@Eaton.com\",\n  \"standardDivisionId\": 1\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/standardDivisionContacts",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"standardDivisionContacts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get an existing StandardDivisionContact",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/standardDivisionContacts/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"standardDivisionContacts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{STANDARD_DIVISION_CONTACT_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update an existing StandardDivisionContact. Administrator and DataManager only",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"contactEmail\": \"JohnIDoes@Eaton.com3\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/standardDivisionContacts/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"standardDivisionContacts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{STANDARD_DIVISION_CONTACT_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete an existing StandardDivisionContact. Administrator and DataManager only",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/standardDivisionContacts/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"standardDivisionContacts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{STANDARD_DIVISION_CONTACT_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Folder for standardDivisionContacts"
+		},
+		{
+			"name": "cnSIssues",
+			"item": [
+				{
+					"name": "Search CnSIssues, results are sorted by `priority asc, createdDate desc`",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/cnSIssues?createdByMe=true",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"cnSIssues"
+							],
+							"query": [
+								{
+									"key": "createdByMe",
+									"value": "true"
+								},
+								{
+									"key": "keyword",
+									"value": "Evaluate",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a new CnSIssue",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e1e18c24-85db-433b-92f5-814cf5489229",
+								"type": "text/javascript",
+								"exec": [
+									"pm.environment.set(\"CNS_ISSUE_ID\", pm.response.json().id);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n      \"description\": \"description 1\",\n      \"actionPlan\": \"action plan 1\",\n      \"personsResponsible\": \"Does, John I\",\n      \"estimatedCompletionDate\": \"2018-01-02\",\n      \"engineerReviewDate\": \"2018-01-02\",\n      \"engineerLeader\": \"Does, John I\",\n      \"financialImpact\": \"$2M\",\n      \"impactSummary\": \"impact summary 1\",\n      \"vpgmName\": \"Does, John I\",\n      \"criticalRoleLeadership\": true,\n      \"successionPlan\": \"succession plan\",\n      \"offensiveDefensive\": \"Offensive\",\n      \"externalPartners\": \"external partners 1\",\n      \"vpgmReviewDate\": \"2018-07-01\",\n      \"priority\": 1,\n      \"region\": \"EPG (Americas)\",\n      \"roadmapAlignment\": \"roadmap alignment 1\",\n      \"standardId\": 1,\n      \"divisionId\": \"1.1\"\n    }"
+						},
+						"url": {
+							"raw": "{{URL}}/cnSIssues",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"cnSIssues"
+							]
+						},
+						"description": "A history record should be inserted into History table"
+					},
+					"response": []
+				},
+				{
+					"name": "Get an existing CnSIssue",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/cnSIssues/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"cnSIssues",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{CNS_ISSUE_ID}}"
+								}
+							]
+						},
+						"description": "This also set the `read` flag to true to indicate that the current logged in user has read this issue"
+					},
+					"response": []
+				},
+				{
+					"name": "Update an existing CnSIssue",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"read\": true\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/cnSIssues/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"cnSIssues",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{CNS_ISSUE_ID}}"
+								}
+							]
+						},
+						"description": "A history record should be inserted into History table"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete an existing CnSIssue",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/cnSIssues/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"cnSIssues",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{CNS_ISSUE_ID}}"
+								}
+							]
+						},
+						"description": "A history record should be inserted into History table"
+					},
+					"response": []
+				}
+			],
+			"description": "Folder for cnSIssues"
+		},
+		{
+			"name": "changeRequests",
+			"item": [
+				{
+					"name": "Search ChangeRequests, results are sorted by `requestedDate desc`. Administrator and AdminApprover only",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/changeRequests?keyword=good",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"changeRequests"
+							],
+							"query": [
+								{
+									"key": "sortColumn",
+									"value": "{{sortColumn}}",
+									"disabled": true
+								},
+								{
+									"key": "sortDirection",
+									"value": "{{sortDirection}}",
+									"disabled": true
+								},
+								{
+									"key": "keyword",
+									"value": "good"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Approve an existing ChangeRequest. Administrator and AdminApprover only",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "23af5c95-0191-4c28-8848-725e1f361081",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/changeRequests/:id/:action",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"changeRequests",
+								":id",
+								":action"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{CHANGE_REQUEST_ID}}"
+								},
+								{
+									"key": "action",
+									"value": "approve"
+								}
+							]
+						},
+						"description": "1. If `action` = `reject`, delete the ChangeRequest from the database.\n2. If `action` = `approve`\n    - Insert, update, or delete (depending on the change request `type`) the standard into Standard table\n    - Insert a new History record into the database\n    - Delete the ChangeRequest from the database\n"
+					},
+					"response": []
+				},
+				{
+					"name": "Reject an existing ChangeRequest. Administrator and AdminApprover only",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/changeRequests/:id/:action",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"changeRequests",
+								":id",
+								":action"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{CHANGE_REQUEST_ID}}"
+								},
+								{
+									"key": "action",
+									"value": "reject"
+								}
+							]
+						},
+						"description": "1. If `action` = `reject`, delete the ChangeRequest from the database.\n2. If `action` = `approve`\n    - Insert, update, or delete (depending on the change request `type`) the standard into Standard table\n    - Insert a new History record into the database\n    - Delete the ChangeRequest from the database\n"
+					},
+					"response": []
+				}
+			],
+			"description": "Folder for changeRequests"
+		},
+		{
+			"name": "sendEmail",
+			"item": [
+				{
+					"name": "Send email",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"to\": [\n    \"JohnIDoes@eaton.com\",\n    \"JackIDoes@eaton.com\"\n  ],\n  \"cc\": [\n    \"JaneMDoe@eaton.com\",\n    \"JenMDoe@eaton.com\"\n  ],\n  \"subject\": \"Urgent problem\",\n  \"body\": \"Please look into these Standards ASAP\",\n  \"standardDivisionIds\": [\n    1,\n    2\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/sendEmail",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"sendEmail"
+							]
+						},
+						"description": "The `from` address will be the email address of the current logged-in user. The selected StandardDivisions will be inserted into the email automatically. It can be a HTML table at the end of the email body, or an PDF attachment which includes the table. The HTML or PDF table should include all properties and child properties (e.g. Standard, Organization, ...) of the selected StandardDivisions."
+					},
+					"response": []
+				}
+			],
+			"description": "Folder for sendEmail"
+		}
+	]
+}

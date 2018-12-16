@@ -1,0 +1,30 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    <body>
+        <div>
+            The following new CnS Issue has been added to the Codes & Standards Application: [[${standard ? standard.organization.name : 'null'}]] – [[${standard? standard.name : 'null'}]] - [[${standard? standard.description : 'null'}]]:
+        </div>
+        <br>
+        <div>
+            <p>Creator Name: [[${issue.creatorName}]]</p>
+            <p>Standard Organization: [[${standard? standard.organization.name : 'null'}]]</p>
+            <p>Standard, Directive, or Regulation Identifier: [[${standard? standard.name : 'null'}]]</p>
+            <p>Division: [[${division.name}]]</p>
+            <p>Description of C&S Issue for Initiative: [[${issue.description}]]</p>
+            <p>Action Plan: [[${issue.actionPlan}]]</p>
+            <p>VP/GM Name: [[${issue.vpgmName}]]</p>
+            <p>Person Responsible for Action Plan: [[${issue.personsResponsible}]]</p>
+            <p>Estimated date for completing the Action Plan: [[${issue.estimatedCompletionDate}]]</p>
+            <p>Date this C&S issue was last reviewed with the Engineering Leader: [[${issue.engineerReviewDate}]]</p>
+            <p>Engineering Leader Name: [[${issue.engineerLeader}]]</p>
+            <p>Summary 'explanation' of the impact: [[${issue.impactSummary}]]</p>
+            <p>Does the Action Plan involve a critical role and/or Corporate leadership?: [[${issue.criticalRoleLeadership}]]</p>
+            <p>Is the Action Plan Offensive or Defensive?: [[${issue.offensiveDefensive}]]</p>
+            <p>List any "external" partners that are needed: [[${issue.externalPartners}]]</p>
+            <p>Date the C&S Score Card describing all issues/initiatives and Action Plans were last reviewed with the VP/GM: [[${issue.vpgmReviewDate}]]</p>
+            <p>C&S Priority number: [[${issue.priority}]]</p>
+            <p>Region or Group: [[${issue.region}]]</p>
+            <p>Alignment with Strategic Plan or Road Map: [[${issue.roadmapAlignment}]]</p>
+            <p>Description of Succession Plan for Critical roles: [[${issue.successionPlan}]]</p>
+        </div>
+    </body>
+ </html>

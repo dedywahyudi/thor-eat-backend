@@ -1,0 +1,15 @@
+services:
+  - docker:dind
+
+deploy_dev:
+  stage: deploy
+  script:
+    - sudo docker image prune -a --force
+    - sudo docker-compose build
+    - sudo docker-compose up -d --force-recreate db app
+    - sleep 30s
+    - sudo docker exec `sudo docker ps --filter "ancestor=tea-sqlsrv" --format "{{.ID}}"` sh -c "python import.py 'full example data.xlsx'"
+  tags:
+    - thor-eat-runner
+  only:
+    - dev

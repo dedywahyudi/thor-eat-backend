@@ -1,0 +1,38 @@
+version: "2.1"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    image: thor-eat
+    container_name: thor-eat
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - 8080:8080 # application
+      - 9990:9990 # admin console
+    logging:
+      driver: json-file
+
+  db:
+    build:
+      context: db/build
+      dockerfile: ./Dockerfile
+    image: tea-sqlsrv
+    container_name: thor-db
+    environment:
+      ACCEPT_EULA: Y
+      MSSQL_SA_PASSWORD: Topcoder123
+    healthcheck:
+      test: ["CMD", "/opt/mssql-tools/bin/sqlcmd", "-S", "localhost", "-U", "sa", "-P", "Topcoder123", "-Q", "select 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 6
+    ports:
+      - 1433:1433
+
+networks:
+    default:
+        driver: bridge
